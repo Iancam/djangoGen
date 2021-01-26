@@ -23,9 +23,10 @@ module.exports = (models, opDir) => {
       : function blank() {
           return "";
         };
-    console.log({ file, renderer });
+    const fpath = path.join(opDir, file + ".py");
+    console.log("created: ", fpath);
     return fs.writeFileSync(
-      path.join(opDir, file + ".py"),
+      fpath,
       renderer({
         modelNames,
         fieldNames,
