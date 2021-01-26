@@ -1,0 +1,15 @@
+url => URL √
+drop field from foriegn √
+from django.db.models.deletion import CASCADE √
+fix serializers tabs √
+add imports to serializers √
+charfield maxlength needed max_length=256 √
+drop manyToMany relationship type in admin view √
+drop readonly fields√
+
+# installedApp mod (projname/settings.py)
+INSTALLED_APPS = [
+    'books',
+# urls mod (projName/urls.py)
+urlpatterns = [
+  path("books", include('books.urls'))
