@@ -1,3 +1,4 @@
+const { modelEntry2PyType } = require("../typeUtils");
 const { ffields } = require("../utils");
 
 const adminHeader = (modelNames) => `
@@ -13,16 +14,32 @@ class ${modelName}AdminForm(forms.ModelForm):
         fields = '__all__'
 `;
 
-const admin = (modelName, fields) => `
+const filterTypes = ["ManyTo"];
+
+const admin = (modelName, fields, models) => {
+  const filteredFields = fields.filter((f) =>
+    filterTypes.every(
+      (type) => !modelEntry2PyType([f, models[modelName][f]]).startsWith(type)
+    )
+  );
+  console.log(
+    fields,
+    fields.map((f) => models[modelName][f]),
+    filteredFields
+  );
+  return `
 class ${modelName}Admin(admin.ModelAdmin):
     form = ${modelName}AdminForm
-    list_display = [${ffields(fields)}]
-    readonly_fields = [${ffields(fields)}]
+    list_display = [${ffields(filteredFields)}]
+    readonly_fields = []
 
 admin.site.register(${modelName}, ${modelName}Admin)
 `;
-module.exports = ({ modelNames, fieldNames }) => `
+};
+module.exports = ({ modelNames, fieldNames, models }) => `
 ${adminHeader(modelNames)}
 ${modelNames.map(adminForm).join("")}
-${modelNames.map((modelName, i) => admin(modelName, fieldNames[i])).join("")}
+${modelNames
+  .map((modelName, i) => admin(modelName, fieldNames[i], models))
+  .join("")}
 `;
