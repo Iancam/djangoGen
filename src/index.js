@@ -7,5 +7,13 @@ exports.run = ([dir, modelsFile]) => {
   fs.existsSync(dir) || fs.mkdirSync(dir);
   exec(`python3 manage.py startapp ${dir}`);
   template(models, dir);
+  console.log(
+    "Don't forget to add " +
+      dir +
+      " to settings.py 'INSTALLED_APPS'\n also, add path(\"" +
+      dir +
+      "\", include('" +
+      dir +
+      ".urls'))"
+  );
 };
-// gen.js;
