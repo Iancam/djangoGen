@@ -14,7 +14,7 @@ const serializer = ([key, fields]) => `
 class ${capitalize(key)}Serializer(ModelSerializer):
   class Meta:
       model = ${capitalize(key)}
-      # fields = (${serializersFields(Object.keys(fields))})`;
+      fields = (${serializersFields(["id", Object.keys(fields)])})`;
 
 module.exports = ({ models }) => {
   return header + Object.entries(models).map(serializer).join("\n\n");
