@@ -1,0 +1,40 @@
+pip install djangorestframework
+pip install django-filter
+
+https://medium.com/@hdsingh13/deploying-django-app-on-heroku-with-postgres-as-backend-b2f3194e8a43
+https://github.com/heroku/django-heroku
+|…
+|# Configure Django App for Heroku.
+|import django_heroku
+|django_heroku.settings(locals())
+
+url => URL √
+drop field from foriegn √
+from django.db.models.deletion import CASCADE √
+fix serializers tabs √
+add imports to serializers √
+charfield maxlength needed max_length=256 √
+drop manyToMany relationship type in admin view √
+drop readonly fields√
+add create to everything√
+add filtering √
+fix_id in serializer√
+drop book category from schema √
+add related_name pluralizations
+write an editor for settings.py
+cache and deploy streamlit https://www.mihaileric.com/posts/state-of-the-art-question-answering-streamlit-huggingface/
+handle nested stuff
+get projName
+
+# projname/settings.py)
+INSTALLED_APPS = [
+    'books',
+    'rest_framework'
+    'django_filters',
+]
+REST_FRAMEWORK = {
+      'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+  }
+# projName/urls.py
+urlpatterns = [
+  path("books", include('books.urls'))

@@ -1,0 +1,26 @@
+{
+  "Book": {
+    "title": "string",
+    "url": "url",
+    "author": "string",
+    "category": "mtm 'Category' through:'BookCategory'"
+  },
+  "Category": {
+    "name": "string"
+  },
+  "User": {
+    "name": "string",
+    "email": "email",
+    "password_digest": "string",
+    "intro": "text"
+  },
+  "BookCategory": {
+    "book": "references",
+    "category": "references"
+  },
+  "UserHistory": {
+    "progress": "integer",
+    "book": "references",
+    "user": "references"
+  }
+}
